@@ -1,6 +1,7 @@
 export const add = (numbers: string) => {
   if (numbers) {
-    const numberlist = numbers.includes(",") ? numbers.split(",") : numbers.split("\n");
+    //const numberlist = numbers.includes(",") ? numbers.split(",") : numbers.split("\n");
+    const numberlist = numbers.split(/[\n|,]/)
 
     let total = 0;
 
