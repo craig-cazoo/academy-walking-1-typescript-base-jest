@@ -1,8 +1,11 @@
 function getStrings(numbers: string) {
   if (numbers.startsWith("//")) {
-    const separator = numbers.charAt(2);
-
-    return numbers.slice(4).split(new RegExp(`[${separator}]`))
+    if (numbers.charAt(3) === "\n") {
+      const separator = numbers.charAt(2);
+      return numbers.slice(4).split(new RegExp(`[${separator}]`))
+    } else {
+      return numbers.slice(7).split(new RegExp("\*{3}"))
+    }
   } else {
     return numbers.split(/[\n,]/)
   }
