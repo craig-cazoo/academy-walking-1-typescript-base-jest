@@ -11,6 +11,7 @@ describe("String Calculator", () => {
     ["1,3", 4],
     ["1,2,3", 6],
     ["1,2,3,4", 10],
+    ["1\n2", 3]
   ])('calculator.add(%s) => %s', (input: string, expected: number) => {
     expect(calculator.add(input)).toEqual(expected);
   });

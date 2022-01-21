@@ -1,12 +1,18 @@
+import { parse } from "path";
+
 export const add = (numbers: string) => {
-  if (numbers.includes(",")) {
-    const [first, second, third] = numbers.split(",");
-    if (third) {
-      return parseInt(first) + parseInt(second) + parseInt(third);
+  if (numbers) {
+    const numberlist = numbers.split(",");
+
+    let total = 0;
+
+    for (let index = 0; index < numberlist.length; index++) {
+        const element = numberlist[index];
+        total += parseInt(element);
     }
 
-    return parseInt(first) + parseInt(second);
+    return total;
   }
 
-  return numbers ? parseInt(numbers) : 0;
+  return 0;
 }
