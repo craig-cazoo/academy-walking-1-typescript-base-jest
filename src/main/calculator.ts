@@ -1,21 +1,29 @@
-import { Console } from "console"
+function getStrings(numbers: string) {
+  if (numbers.startsWith("//")) {
+    const separator = numbers.charAt(2);
+
+    return numbers.slice(4).split(new RegExp(`[${separator}]`))
+  } else {
+    return numbers.split(/[\n,]/)
+  }
+}
 
 export const add = (numbers: string) => {
   if (numbers) {
-    let numberList: string[]
-    if (numbers.startsWith("//")) {        
-       numberList = numbers.slice(4).split(new RegExp(`[${numbers.charAt(2)}]`))
-    } else {
-      numberList = numbers.split(/[\n,]/)
-    }
+    const strings = getStrings(numbers);
 
     let total = 0;
 
-    for (let index = 0; index < numberList.length; index++) {
-        const element = numberList[index];
-        const parsed = parseInt(element)
-        if (parsed < 0) throw Error(`negatives not allowed, value=${parsed}`)
-        total += parsed;
+    const numberList = strings.map(s => parseInt(s));
+
+    const negativeNumbers = numberList.filter(n => n < 0);
+
+    if (negativeNumbers.length > 0) {
+      throw Error(`negatives not allowed, value=${negativeNumbers.join()}`)
+    }
+
+    for (const n of numberList) {
+        total += n;
     }
 
     return total;
