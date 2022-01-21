@@ -25,4 +25,8 @@ describe("String Calculator", () => {
   test("Testing for negative value and throw error", () => {
     expect(() => calculator.add("-1")).toThrowError("negatives not allowed, value=-1")
   })
+
+  test("multiple negative values throws error", () => {
+    expect(() => calculator.add("-1,-2")).toThrowError("negatives not allowed, value=-1,-2")
+  })
 });

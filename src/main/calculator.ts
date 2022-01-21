@@ -13,7 +13,9 @@ export const add = (numbers: string) => {
 
     for (let index = 0; index < numberList.length; index++) {
         const element = numberList[index];
-        total += parseInt(element);
+        const parsed = parseInt(element)
+        if (parsed < 0) throw Error(`negatives not allowed, value=${parsed}`)
+        total += parsed;
     }
 
     return total;
