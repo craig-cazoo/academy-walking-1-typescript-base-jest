@@ -1,7 +1,8 @@
 export const add = (numbers: string) => {
-    if (numbers === "1,2") {
-        return 3;
-    } else {
-        return numbers ? parseInt(numbers) : 0;
-    }
+  if (numbers.includes(",")) {
+    const [first, second] = numbers.split(",");
+    return parseInt(first) + parseInt(second);
+  } else {
+      return numbers ? parseInt(numbers) : 0;
+  }
 }
