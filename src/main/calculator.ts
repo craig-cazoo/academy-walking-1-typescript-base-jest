@@ -1,12 +1,16 @@
 export const add = (numbers: string) => {
   if (numbers) {
-    //const numberlist = numbers.includes(",") ? numbers.split(",") : numbers.split("\n");
-    const numberlist = numbers.split(/[\n|,]/)
+    let numberList: string[]
+    if (numbers.startsWith("//")) {
+      numberList = numbers.slice(4).split(/[\n,;]/)
+    } else {
+      numberList = numbers.split(/[\n,]/)
+    }
 
     let total = 0;
 
-    for (let index = 0; index < numberlist.length; index++) {
-        const element = numberlist[index];
+    for (let index = 0; index < numberList.length; index++) {
+        const element = numberList[index];
         total += parseInt(element);
     }
 
