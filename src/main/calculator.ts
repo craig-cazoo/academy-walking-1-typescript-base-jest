@@ -1,5 +1,2 @@
-export const calculator = {
-  add: (numbers: string) => {
-    throw new Error("Not implemented");
-  }
-}
+export const add = (numbers: string) => 0;
+
