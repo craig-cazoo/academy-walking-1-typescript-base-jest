@@ -18,6 +18,7 @@ describe("String Calculator", () => {
     ["//;\n1;2", 3],
     ["//∆\n1∆2", 3],
     ["2,1001", 2],
+    ["//[***]\n1***2***3", 6],
   ])('calculator.add(%s) => %s', (input: string, expected: number) => {
     expect(calculator.add(input)).toEqual(expected);
   });

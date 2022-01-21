@@ -23,7 +23,8 @@ export const add = (numbers: string) => {
     }
 
     for (const n of numberList) {
-        total += n;
+        if (n <= 1000)
+           total += n;
     }
 
     return total;
