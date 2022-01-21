@@ -1,8 +1,10 @@
+import { Console } from "console"
+
 export const add = (numbers: string) => {
   if (numbers) {
     let numberList: string[]
-    if (numbers.startsWith("//")) {
-      numberList = numbers.slice(4).split(/[\n,;]/)
+    if (numbers.startsWith("//")) {        
+       numberList = numbers.slice(4).split(new RegExp(`[${numbers.charAt(2)}]`))
     } else {
       numberList = numbers.split(/[\n,]/)
     }

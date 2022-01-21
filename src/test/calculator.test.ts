@@ -20,4 +20,9 @@ describe("String Calculator", () => {
   ])('calculator.add(%s) => %s', (input: string, expected: number) => {
     expect(calculator.add(input)).toEqual(expected);
   });
+
+  // Test for exceptions
+  test("Testing for negative value and throw error", () => {
+    expect(() => calculator.add("-1")).toThrowError("negatives not allowed, value=-1")
+  })
 });
