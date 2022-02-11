@@ -91,4 +91,17 @@ describe("TicTacToe", () => {
 
     expect(game.getWinningPlayer()).toEqual(Player.PlayerO);
   });
+
+  it("player O should win when it has played in bottom row 3 times", () => {
+    const game = new TicTacToe();
+
+    game.move(Position.TopMiddle);
+    game.move(Position.bottomLeft);
+    game.move(Position.TopLeft);
+    game.move(Position.bottomMiddle);
+    game.move(Position.BottomLeft);
+    game.move(Position.bottomRight);
+
+    expect(game.getWinningPlayer()).toEqual(Player.PlayerO);
+  });
 });
