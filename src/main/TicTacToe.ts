@@ -3,14 +3,14 @@ export enum Player {
   PlayerO = "player-o",
 }
 
-
 export enum Position {
   TopLeft,
   TopMiddle,
   TopRight,
   MiddleLeft,
   MiddleMiddle,
-  BottomLeft
+  MiddleRight,
+  BottomLeft,
 }
 
 class PositionRepository {
@@ -44,11 +44,12 @@ export class TicTacToe {
 
   getWinningPlayer(): Player | undefined {
     if (
-      this.getPlayerInPosition(Position.TopRight) === Player.PlayerX &&
-      this.getPlayerInPosition(Position.TopMiddle) === Player.PlayerX &&
-      this.getPlayerInPosition(Position.TopLeft) === Player.PlayerX
+      this.getPlayerInPosition(Position.TopRight) ===
+        this.getPlayerInPosition(Position.TopMiddle) &&
+      this.getPlayerInPosition(Position.TopMiddle) ===
+        this.getPlayerInPosition(Position.TopLeft)
     ) {
-      return Player.PlayerX;
+      return this.getPlayerInPosition(Position.TopRight);
     }
   }
 
