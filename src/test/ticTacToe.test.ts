@@ -3,34 +3,41 @@ enum Player {
   PlayerO = "player-o",
 }
 
+enum Position {
+  TL = 0,
+}
+
 class TicTacToe {
-  private hasMoved: boolean = false;
+  private whoIsNext: Player = Player.PlayerX;
 
   getNextPlayer(): Player {
-    return this.hasMoved ? Player.PlayerO : Player.PlayerX;
+    return this.whoIsNext;
   }
 
-  move(): void {
-    this.hasMoved = true;
+  move(position: Position): void {
+    this.whoIsNext =
+      this.whoIsNext === Player.PlayerX ? Player.PlayerO : Player.PlayerX;
   }
 }
 
 describe("TicTacToe", () => {
-  it("should be X to go first", () => {
+  it.each([
+    [Player.PlayerX, 0],
+    [Player.PlayerO, 1],
+    [Player.PlayerX, 2],
+    [Player.PlayerO, 3],
+  ])("should be %s get to go next after %i moves ", (nextPlayer, moveCount) => {
     const game = new TicTacToe();
-    expect(game.getNextPlayer()).toEqual(Player.PlayerX);
+
+    for (let index = 0; index < moveCount; index++) {
+      game.move(Position.TL);
+    }
+    expect(game.getNextPlayer()).toEqual(nextPlayer);
   });
 
-  it("should be O to go second", () => {
+  it("should not be able to play in played position ", () => {
     const game = new TicTacToe();
-    game.move();
-    expect(game.getNextPlayer()).toEqual(Player.PlayerO);
-  });
-
-  it("should be X to go third", () => {
-    const game = new TicTacToe();
-    game.move();
-    game.move();
-    expect(game.getNextPlayer()).toEqual(Player.PlayerX);
+    game.move(Position.TL);
+    expect(() => game.move(Position.TL)).toThrowError();
   });
 });
