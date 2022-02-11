@@ -3,13 +3,12 @@ export enum Player {
   PlayerO = "player-o",
 }
 
-
 export enum Position {
   TopLeft,
   TopMiddle,
   TopRight,
   MiddleLeft,
-  MiddleMiddle
+  MiddleMiddle,
 }
 
 class PositionRepository {
@@ -43,6 +42,6 @@ export class TicTacToe {
   }
 
   getWinningPlayer() {
-    throw new Error('Not implemented');
+    if (this.playedMoves.hasPosition(Position.TopRight)) return Player.PlayerX;
   }
 }
