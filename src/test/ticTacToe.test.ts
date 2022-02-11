@@ -37,7 +37,7 @@ describe("TicTacToe", () => {
     expect(game.getWinningPlayer()).toEqual(Player.PlayerX);
   });
 
-  it("player X should not win", () => {
+  it("player X should not win if missing top right", () => {
     const game = new TicTacToe();
 
     game.move(Position.TopLeft);
@@ -48,9 +48,19 @@ describe("TicTacToe", () => {
     expect(game.getWinningPlayer()).toEqual(undefined);
   });
 
-  it("player X should not win", () => {
+  it("player X should not win if only has played in top right", () => {
     const game = new TicTacToe();
 
+    game.move(Position.TopRight);
+
+    expect(game.getWinningPlayer()).toEqual(undefined);
+  });
+
+  it("player X should not win if player O is blocking X", () => {
+    const game = new TicTacToe();
+
+    game.move(Position.TopLeft);
+    game.move(Position.TopMiddle);
     game.move(Position.TopRight);
 
     expect(game.getWinningPlayer()).toEqual(undefined);

@@ -41,7 +41,13 @@ export class TicTacToe {
       this.whoIsNext === Player.PlayerX ? Player.PlayerO : Player.PlayerX;
   }
 
-  getWinningPlayer() {
-    if (this.playedMoves.hasPosition(Position.TopRight)) return Player.PlayerX;
+  getWinningPlayer(): Player | undefined {
+    if (this.hasPositionBeenPlayed(Position.TopRight) && this.hasPositionBeenPlayed(Position.TopMiddle) && this.hasPositionBeenPlayed(Position.TopLeft)) {
+      return Player.PlayerX;
+    }
+  }
+
+  private hasPositionBeenPlayed(position: Position): boolean {
+    return this.playedMoves.hasPosition(position);
   }
 }
