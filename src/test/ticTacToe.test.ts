@@ -96,11 +96,11 @@ describe("TicTacToe", () => {
     const game = new TicTacToe();
 
     game.move(Position.TopMiddle);
-    game.move(Position.bottomLeft);
-    game.move(Position.TopLeft);
-    game.move(Position.bottomMiddle);
     game.move(Position.BottomLeft);
-    game.move(Position.bottomRight);
+    game.move(Position.TopLeft);
+    game.move(Position.BottomMiddle);
+    game.move(Position.MiddleRight);
+    game.move(Position.BottomRight);
 
     expect(game.getWinningPlayer()).toEqual(Player.PlayerO);
   });
