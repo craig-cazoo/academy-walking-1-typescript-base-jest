@@ -12,14 +12,17 @@ export enum Position {
 }
 
 class PositionRepository {
-  private positions: Set<Position> = new Set();
+  private positions: Map<Position, Player> = new Map();
 
-  public addPosition(position: Position) {
-    this.positions.add(position);
+  public addPosition(position: Position, player: Player) {
+    if (this.positions.has(position)) {
+      throw new Error(`the position ${position} has already been played`);
+    }
+    this.positions.set(position, player);
   }
 
-  public hasPosition(position: Position): boolean {
-    return this.positions.has(position);
+  public getPlayerInPosition(position: Position): Player | undefined {
+    return this.positions.get(position);
   }
 }
 
@@ -32,22 +35,22 @@ export class TicTacToe {
   }
 
   move(position: Position): void {
-    if (this.playedMoves.hasPosition(position)) {
-      throw new Error(`the position ${position} has already been played`);
-    }
-
-    this.playedMoves.addPosition(position);
+    this.playedMoves.addPosition(position, this.whoIsNext);
     this.whoIsNext =
       this.whoIsNext === Player.PlayerX ? Player.PlayerO : Player.PlayerX;
   }
 
   getWinningPlayer(): Player | undefined {
-    if (this.hasPositionBeenPlayed(Position.TopRight) && this.hasPositionBeenPlayed(Position.TopMiddle) && this.hasPositionBeenPlayed(Position.TopLeft)) {
+    if (
+      this.hasPositionBeenPlayed(Position.TopRight) &&
+      this.hasPositionBeenPlayed(Position.TopMiddle) &&
+      this.hasPositionBeenPlayed(Position.TopLeft)
+    ) {
       return Player.PlayerX;
     }
   }
 
   private hasPositionBeenPlayed(position: Position): boolean {
-    return this.playedMoves.hasPosition(position);
+    return !!this.playedMoves.getPlayerInPosition(position);
   }
 }
