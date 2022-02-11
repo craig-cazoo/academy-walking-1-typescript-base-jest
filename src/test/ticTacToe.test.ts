@@ -4,11 +4,15 @@ enum Player {
 }
 
 class TicTacToe {
+  private hasMoved: boolean = false;
+
   getNextPlayer(): Player {
-    return Player.PlayerX;
-    throw new Error("Not implemented");
+    return this.hasMoved ? Player.PlayerO : Player.PlayerX;
   }
-  move(): void {}
+
+  move(): void {
+    this.hasMoved = true;
+  }
 }
 
 describe("TicTacToe", () => {
@@ -16,9 +20,17 @@ describe("TicTacToe", () => {
     const game = new TicTacToe();
     expect(game.getNextPlayer()).toEqual(Player.PlayerX);
   });
+
   it("should be O to go second", () => {
     const game = new TicTacToe();
     game.move();
     expect(game.getNextPlayer()).toEqual(Player.PlayerO);
+  });
+
+  it("should be X to go third", () => {
+    const game = new TicTacToe();
+    game.move();
+    game.move();
+    expect(game.getNextPlayer()).toEqual(Player.PlayerX);
   });
 });
